@@ -1,6 +1,4 @@
-t![title_letter](https://user-images.githubusercontent.com/80070644/201461047-7062464d-75f5-44ce-99d2-f6fff5009d23.png)
-
-<!-- <img src="./illust/title_letter.png" width="100%"> -->
+![title_letter](https://user-images.githubusercontent.com/80070644/201461047-7062464d-75f5-44ce-99d2-f6fff5009d23.png)
 
 # API Hashing  
 Windows API Hashingを行っているサンプルコードです。  
