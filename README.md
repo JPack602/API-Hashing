@@ -28,6 +28,8 @@ MessageBoxA関数はUser32.dllからエクスポートされているので、Us
 1. PEB構造体からkernel32.dllのアドレスを取得。
 2. kernel32.dllの中からLoadLibrary関数のアドレスを取得。
 3. LoadLibrary関数を用いて、DLLをロード。
+<br>
+<br>
 
 ## 1. PEB構造体からkernel32.dllのアドレスを取得
 
@@ -85,6 +87,8 @@ PEBのアドレスが取得できたら次に、Kernel32.dllのアドレスを�
 
 これで第一段階はクリアです。
 ![kernel32 dll](https://user-images.githubusercontent.com/80070644/201461101-8809d02d-9b12-405c-a942-7ef611ee1f99.png)
+<br>
+<br>
 
 ## 2. kernel32.dllの中からLoadLibrary関数のアドレスを取得
 
@@ -149,6 +153,8 @@ void *SolveFunctionAddress(void *lpModule, const uint32_t dwHash)
 第二段階では上記の関数を利用して、LoadLibrary関数のアドレスを取得します。注目してほしいのは、この関数はDLLのアドレスと関数名のハッシュ値を引数として受け取ります。そうすることにより逆アセンブルやデバッグされたとしても、引数からどの関数のアドレスを取得しようとしているのか、特定することが困難になります。
 
 今回はLoadLibrary関数のアドレスを取得する必要がある為、第一引数に"kernel32.dll"、第二引数にLoadLibraryAという文字列のハッシュ"0x9322F2DB"を指定するとアドレスを取得することが可能です。
+<br>
+<br>
 
 ## 3. LoadLibrary関数を用いてDLLをロード
 
@@ -166,7 +172,8 @@ fnMessageBoxA(NULL, "test", "sample text.", MB_OK);
 下準備は整っているので後は上記の様に、MessageBoxAをエクスポートしているuser32.dllをロードする。そして、先ほど紹介した関数を利用して、DLLのアドレス・関数名のハッシュを渡す事により、関数のアドレスは取得ができます。実際に使用する際は、LoadLibrary関数に渡すDLL名を暗号化すると、より効果的でしょう。
 
 https://user-images.githubusercontent.com/80070644/201461106-5b9ec9b4-6299-4f60-8eb4-9904cfeedd3b.mp4
-
+<br>
+<br>
 
 ## さいごに。
 "API Hashing"について詳細な説明が出来たかは分かりませんが、この記事を見ている方のお役に立てれば幸いです。
