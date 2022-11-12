@@ -171,8 +171,10 @@ if (! fnMessageBoxA) return 1;
 fnMessageBoxA(NULL, "test", "sample text.", MB_OK);
 ```
 下準備は整っているので後は上記の様に、MessageBoxAをエクスポートしているuser32.dllをロードする。そして、先ほど紹介した関数を利用して、DLLのアドレス・関数名のハッシュを渡す事により、関数のアドレスは取得ができます。実際に使用する際は、LoadLibrary関数に渡すDLL名を暗号化すると、より効果的でしょう。
+<br>
+<br>
 
-https://user-images.githubusercontent.com/80070644/201461106-5b9ec9b4-6299-4f60-8eb4-9904cfeedd3b.mp4
+https://user-images.githubusercontent.com/80070644/201461718-07f17e88-1568-4875-80ec-caa66bbceab8.mp4
 <br>
 <br>
 
