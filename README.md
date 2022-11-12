@@ -1,4 +1,4 @@
-![API Hashing](.//illust/title_letter.png)
+t![title_letter](https://user-images.githubusercontent.com/80070644/201461047-7062464d-75f5-44ce-99d2-f6fff5009d23.png)
 
 <!-- <img src="./illust/title_letter.png" width="100%"> -->
 
@@ -7,7 +7,7 @@ Windows API Hashingを行っているサンプルコードです。
   
 API Hashingは日本語で書かれた資料が少ない（存在"は"しているが有料の記事である事が多い）為、今回はAPI Hashingの仕組みについてイラストとサンプルコードとを用いて紹介したいと思います。これはプログラム内で関数をただ呼び出すだけではなく、関数をエクスポートしてるDLLから目的の関数を探し出し、動的にアドレスを解決する仕組みのことを指します。この「API Hashing」というテクニックを用いることで以下の様に、プログラム内で呼び出されている関数(Windows API等々)を隠す事が可能です。またAPI Monitorでも関数呼び出しの様子をモニタリングすることが困難となります。
 
-![cmpare_import](./illust/cmpare_import_dir.png)
+![cmpare_import_dir](https://user-images.githubusercontent.com/80070644/201461071-ffdb092e-3816-4208-982b-36a1c266d506.png)
 <br>
 
 インポートしている関数を隠すだけなら、[UPX](https://upx.github.io/)の様なパッカーを使用した方が手軽ではありますが、今回は「API Hashing」というタイトルが付いている都合上、パッカーについては触れません。
@@ -86,7 +86,7 @@ PEBのアドレスが取得できたら次に、Kernel32.dllのアドレスを�
 その中には、InLoadOrderModuleList・InMemoryOrderModuleList・InInitializationOrderModuleListの3つが存在しており、どれを使用してもイイのですが、今回はInLoadOrderModuleListを使用するものとします。これらのリストはプロセスにロードされているモジュールの情報を持ち、順番通りに双方向リンクリストを辿っていくとkernel32.dllのアドレスが手に入ります。
 
 これで第一段階はクリアです。
-![kernel32.dll](./illust/kernel32.dll.png)
+![kernel32 dll](https://user-images.githubusercontent.com/80070644/201461101-8809d02d-9b12-405c-a942-7ef611ee1f99.png)
 
 ## 2. kernel32.dllの中からLoadLibrary関数のアドレスを取得
 
@@ -167,7 +167,8 @@ fnMessageBoxA(NULL, "test", "sample text.", MB_OK);
 ```
 下準備は整っているので後は上記の様に、MessageBoxAをエクスポートしているuser32.dllをロードする。そして、先ほど紹介した関数を利用して、DLLのアドレス・関数名のハッシュを渡す事により、関数のアドレスは取得ができます。実際に使用する際は、LoadLibrary関数に渡すDLL名を暗号化すると、より効果的でしょう。
 
-./illust/example_of_use.mp4
+https://user-images.githubusercontent.com/80070644/201461106-5b9ec9b4-6299-4f60-8eb4-9904cfeedd3b.mp4
+
 
 ## さいごに。
 "API Hashing"について詳細な説明が出来たかは分かりませんが、この記事を見ている方のお役に立てれば幸いです。
